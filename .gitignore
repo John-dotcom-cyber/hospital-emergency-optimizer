@@ -2,6 +2,10 @@
 __pycache__/
 *.py[codz]
 *$py.class
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
 
 # C extensions
 *.so
@@ -205,3 +209,19 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Données
+data/raw/
+data/processed/
+data/tmp/
+*.csv
+*.parquet
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
