@@ -1,91 +1,112 @@
-# hospital-emergency-optimizer
+# 🧬 Architecture Technique — Hospital Emergency Optimizer
 
-# 🚑 Hospital Emergency Optimizer  
-### Anticiper plutôt que subir : une plateforme intelligente pour fluidifier les urgences hospitalières
+## 1. Vue globale
 
-Les services d’urgences font face à des défis majeurs : saturation, temps d’attente élevés, pression sur les équipes, manque de visibilité en temps réel.  
-Ce projet vise à construire une solution complète, modulaire et intelligente pour aider les hôpitaux à **prévoir, simuler, optimiser et piloter** leurs urgences.
+L’architecture technique repose sur quatre couches :
 
----
-
-## 🎯 Objectifs du projet
-
-- Réduire les temps d’attente et améliorer le parcours patient  
-- Anticiper les pics d’activité grâce à la prédiction  
-- Soutenir les équipes médicales dans la prise de décision  
-- Optimiser l’allocation des ressources (personnel, lits, salles, matériel)  
-- Fournir une vision claire, harmonisée et actionnable des urgences  
+1. **Ingestion & harmonisation**
+2. **Pipeline de traitement**
+3. **Moteurs de calcul (prédiction, simulation, optimisation)**
+4. **Exposition (API + dashboard)**
 
 ---
 
-## 🧩 Modules du produit
+## 2. Ingestion & harmonisation
 
-### 🔮 1. Prédiction du flux d’arrivées  
-Modèles de séries temporelles intégrant :  
-- météo  
-- saisonnalité  
-- épidémies  
-- événements locaux  
-- historique des urgences  
+### Sources possibles :
+- exports SIH (urgences, UHCD…)
+- données météo
+- données épidémiologiques
+- données internes (planning, lits)
 
-### 🧪 2. Simulation des files d’attente  
-Un moteur de simulation pour tester différents scénarios :  
-- ajout/retrait de personnel  
-- modification du triage  
-- afflux exceptionnel de patients  
-- saturation des lits  
-
-### 🧠 3. Optimisation des ressources  
-Algorithmes d’optimisation pour :  
-- planification du personnel  
-- allocation des salles et des lits  
-- gestion du matériel critique  
-
-### 📊 4. Tableau de bord temps réel  
-Un dashboard clair et actionnable permettant de :  
-- visualiser l’activité en temps réel  
-- anticiper les pics  
-- suivre les indicateurs clés  
-- recevoir des recommandations  
+### Pipeline :
+- détection automatique du schéma
+- mapping intelligent des colonnes
+- validation des types
+- nettoyage
+- enrichissement
+- stockage en parquet
 
 ---
 
-## 🏗️ Architecture du dépôt
+## 3. Pipeline de traitement
 
+### Étapes :
+- feature engineering
+- agrégation temporelle
+- normalisation
+- préparation pour les modèles
+- stockage intermédiaire
 
----
-
-## 🚀 Roadmap (préliminaire)
-
-- [ ] Définition de la vision produit  
-- [ ] Architecture fonctionnelle  
-- [ ] Architecture technique  
-- [ ] Prototype de prédiction  
-- [ ] Prototype de simulation  
-- [ ] Prototype d’optimisation  
-- [ ] Dashboard Streamlit / Power BI  
-- [ ] MVP complet  
-- [ ] Documentation et publication  
+Technos possibles :
+- pandas / polars
+- dask pour le scaling
+- pyarrow pour le stockage
 
 ---
 
-## 🤝 Contributions
+## 4. Moteur de prédiction
 
-Les contributions sont les bienvenues :  
-- idées  
-- retours  
-- données anonymisées  
-- modèles  
-- visualisations  
+Modèles possibles :
+- Prophet
+- SARIMA
+- XGBoost
+- LSTM / GRU
+
+Fonctionnalités :
+- entraînement automatique
+- sélection de modèle
+- backtesting
+- génération d’alertes
 
 ---
 
-## 📄 Licence
+## 5. Moteur de simulation
 
-À définir (MIT, Apache 2.0, etc.)
+Modèles :
+- files d’attente M/M/1, M/M/c
+- simulation multi-étapes
+- simulation événementielle discrète
+
+Technos :
+- simpy
+- numpy
 
 ---
 
-## 👤 Auteur
+## 6. Moteur d’optimisation
 
-Projet initié par **Jonathan Soihier**, passionné par la data, la santé et l’innovation sociale.
+Méthodes :
+- programmation linéaire
+- heuristiques
+- recherche locale
+- contraintes personnalisées
+
+Technos :
+- pulp
+- ortools
+
+---
+
+## 7. Exposition & interface
+
+### API interne :
+- FastAPI
+- endpoints pour :
+  - prédictions
+  - simulation
+  - optimisation
+  - données temps réel
+
+### Dashboard :
+- Streamlit (MVP)
+- Power BI (production)
+
+---
+
+## 8. Sécurité & conformité
+
+- anonymisation des données
+- logs d’accès
+- séparation des environnements
+- conformité RGPD
