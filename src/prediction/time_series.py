@@ -7,8 +7,13 @@ def train_prophet(df: pd.DataFrame, date_col: str, target_col: str):
     model.fit(model_df, freq="H")
     return model
 
-def forecast_prophet(model, periods: int, freq: str = "H"):
-    future = model.make_future_dataframe(periods=periods)
+def forecast_prophet(model, df, periods: int, freq: str = "H"):
+    future = model.make_future_dataframe(
+        df=df,
+        periods=periods,
+        n_historic_predictions=True
+    )
     forecast = model.predict(future)
     return forecast
+
 
