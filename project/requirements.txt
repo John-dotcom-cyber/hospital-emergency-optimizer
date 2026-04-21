@@ -1,0 +1,16 @@
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+prophet
+statsmodels
+simpy
+pulp
+ortools
+fastapi
+uvicorn
+streamlit
+pyarrow
+streamlit
+plotly

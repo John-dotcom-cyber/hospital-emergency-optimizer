@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import math
 
 # Paramètre du modèle M/M/c
 MU = 4.0  # capacité moyenne d'un médecin (patients/heure)
@@ -7,16 +8,18 @@ MU = 4.0  # capacité moyenne d'un médecin (patients/heure)
 def calculer_rho(lambda_, c):
     return lambda_ / (c * MU)
 
+
 def erlang_c(lambda_, c):
     rho = calculer_rho(lambda_, c)
     if rho >= 1:
         return 1.0
 
-    sum_terms = sum((lambda_ / MU)**k / np.math.factorial(k) for k in range(c))
-    last_term = ((lambda_ / MU)**c / np.math.factorial(c)) * (1 / (1 - rho))
+    sum_terms = sum((lambda_ / MU)**k / math.factorial(k) for k in range(c))
+    last_term = ((lambda_ / MU)**c / math.factorial(c)) * (1 / (1 - rho))
     p0 = 1 / (sum_terms + last_term)
     pc = last_term * p0
     return pc
+
 
 def temps_attente(lambda_, c):
     # éviter la division par zéro
@@ -27,10 +30,10 @@ def temps_attente(lambda_, c):
     return pc / (c * MU - lambda_)
 
 
+
 def trouver_c_optimal(lambda_, objectif_minutes):
     objectif_heures = objectif_minutes / 60
 
-    # minimum théorique
     c_min = max(1, int(np.ceil(lambda_ / MU)))
 
     for c in range(c_min, c_min + 20):
@@ -39,7 +42,6 @@ def trouver_c_optimal(lambda_, objectif_minutes):
             return c
 
     return c_min + 20
-
 
 
 def enrichir_dataframe(df):
